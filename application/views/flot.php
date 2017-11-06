@@ -274,6 +274,7 @@
             <div class="col-lg-12">
                 <p>关联产品</p>
                 <select class="form-control" id="slt_good">
+                    <option value="0">不关联产品</option>
                     <?php
                     foreach ($goods as $good) {
                         echo "<option value='" . $good['goods_id'] . "'>" . $good['goods_name'] . "</option>>";

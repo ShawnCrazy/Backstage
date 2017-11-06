@@ -94,7 +94,7 @@ class Upload extends CI_Controller
         } else {
             $data['image_name'] = $_POST['goods_name'];
             $data['image_type'] = $_POST['type'];
-            $data['image_url'] = $_POST['goods_name'];
+            $data['image_url'] = 'uploads/'.$this->upload->data('file_name');
             $data['goods_id'] = (int)$_POST['goods_id'];
             echo $this->InsertModel->addData('images', $data);
         }

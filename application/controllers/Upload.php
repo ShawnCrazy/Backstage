@@ -61,16 +61,33 @@ class Upload extends CI_Controller
     }
     function insertDb(){
         $data = array(
+            'goods_name' => $this->input->post('name'),
             'title' => $this->input->post('title'),
-            'price' => $this->input->post('price'),
-            'stock' => $this->input->post('stock'),
-            'size' => $this->input->post('size'),
+            'price' => (float)$this->input->post('price'),
+            'sale' => (float)$this->input->post('sale'),
+            'stock' => (int)$this->input->post('stock'),
+            'size' => (int)$this->input->post('size'),
             'color' => $this->input->post('color'),
             'introduce' => $this->input->post('introduce'),
-            'isSlider' => $this->input->post('isSlider')
+            //'isSlider' => $this->input->post('isSlider')
         );
-        echo json_encode($data);
-//        $this->InsertModel->addData($data);
+//        echo json_encode($data);
+        echo $this->InsertModel->addData('goods',$data);
+    }
+    function insertImg(){
+        /*上传文件配置*/
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = 100;
+        $config['max_width'] = 1024;
+        $config['max_height'] = 768;
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('upload_file')) {
+            echo 'successful';
+        } else {
+            echo 'defeat';
+        }
     }
 
 }

@@ -13,9 +13,9 @@ class InsertModel extends CI_Model
         $this->load->database();
     }
 
-    function addData($data)
+    function addData($table, $data)
     {
-        $query = $this->db->insert('product', $data);
+        $query = $this->db->insert($table, $data);
     }
 
     function deleteData($data)

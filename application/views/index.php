@@ -274,24 +274,32 @@
             <!--                <form action="success" enctype="multipart/form-data" method="post">-->
             <?php echo form_open_multipart('upload/do_upload') ?>
             <div class="form-group">
-                <label for="title">商品标题</label>
-                <input type="text" class="form-control" id="title" name="title" required>
+                <label for="name">商品名</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="title">商品标题(可选)</label>
+                <input type="text" class="form-control" id="title" name="title">
             </div>
             <div class="form-group">
                 <label for="price">价格</label>
-                <input type="number" class="form-control" id="price" name="price" required>
+                <input type="text" class="form-control" id="price" name="price" required>
+            </div>
+            <div class="form-group">
+                <label for="sale">特价(可选)</label>
+                <input type="text" class="form-control" id="sale" name="sale">
             </div>
             <div class="form-group">
                 <label for="stock">库存</label>
-                <input type="number" class="form-control" id="stock" name="stock" required>
+                <input type="text" class="form-control" id="stock" name="stock" required>
             </div>
             <div class="form-group">
                 <label for="color">颜色</label>
-                <input type="number" class="form-control" id="color" name="color" required>
+                <input type="text" class="form-control" id="color" name="color" required>
             </div>
             <div class="form-group">
                 <label for="size">大小</label>
-                <input type="number" class="form-control" id="size" name="size" required>
+                <input type="text" class="form-control" id="size" name="size" required>
             </div>
             <div class="form-group">
                 <label for="intr">介绍</label>
@@ -306,13 +314,9 @@
                     <input class="form-check-input" type="checkbox" name="isSlider"> 是否轮播
                 </label>
             </div>
-            <button type="submit" class="btn btn-primary" value="upload">提交</button>
             </form>
-
+            <button id="btn_sub" class="btn btn-primary" >提交</button>
         </div>
-        <!-- /.row -->
-
-        <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
 
@@ -335,27 +339,31 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo base_url() ?>dist/js/sb-admin-2.js"></script>
-<button class="btn-block" id="btn">点我有惊喜</button>
+
 </body>
 <script>
-    $('#btn').click(function (e) {
+    $('#btn_sub').click(function (e) {
         var url = '<?php echo site_url('upload/insertDb') ?>';
         $.ajax({
-            url:url,
-            method:'post',
-            data:{title:$('#title').val(),
-                price:$('#price').val(),
-                stock:$('#stock').val(),
-                color:$('#color').val(),
-                size:$('#size').val(),
-                introduce:$('#intr').val()},
-            success:function (data) {
+            url: url,
+            method: 'post',
+            data: {
+                name:$('#name').val(),
+                title: $('#title').val(),
+                price: parseFloat($('#price').val()),
+                sale: parseFloat($('#sale').val()),
+                stock: parseInt($('#stock').val()),
+                color: $('#color').val(),
+                size: parseInt($('#size').val()),
+                introduce: $('#intr').val()
+            },
+            success: function (data) {
                 console.log(data);
             },
-            error:function (data) {
+            error: function (data) {
                 console.log(data);
             }
         })
-    })
+    });
 </script>
 </html>

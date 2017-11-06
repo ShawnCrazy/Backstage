@@ -26,11 +26,10 @@ class DBModel extends CI_Model
         return $result->result_array();
     }
     /*获取商品详情*/
-    function getInfo($type)
+    function getInfo()
     {
         $result = $this->db->select('*')
             ->from('goods')
-            ->where("image_type='$type'")
             ->get();
         return $result->result_array();
     }

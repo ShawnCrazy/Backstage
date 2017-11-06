@@ -59,7 +59,9 @@ class Upload extends CI_Controller
             $this->load->view('index', $data);
         }
     }
-    function insertDb(){
+
+    function insertDb()
+    {
         $data = array(
             'goods_name' => $this->input->post('name'),
             'title' => $this->input->post('title'),
@@ -72,21 +74,29 @@ class Upload extends CI_Controller
             //'isSlider' => $this->input->post('isSlider')
         );
 //        echo json_encode($data);
-        echo $this->InsertModel->addData('goods',$data);
+        echo $this->InsertModel->addData('goods', $data);
     }
-    function insertImg(){
+
+    function insertImg()
+    {
         /*上传文件配置*/
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = 100;
         $config['max_width'] = 1024;
         $config['max_height'] = 768;
+
+        $config['file_name'] = time();//图片名字
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload('upload_file')) {
-            echo 'successful';
+            echo '失败';
         } else {
-            echo 'defeat';
+            $data['image_name'] = $_POST['goods_name'];
+            $data['image_type'] = $_POST['type'];
+            $data['image_url'] = $_POST['goods_name'];
+            $data['goods_id'] = (int)$_POST['goods_id'];
+            echo $this->InsertModel->addData('images', $data);
         }
     }
 

@@ -265,20 +265,67 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Flot</h1>
+                <h1 class="page-header">上传图片</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
-                <input type="file" name="image" id="inputfile"/>
-                <button class="btn-block" id="btn_img">上传图片</button>
+                <p>关联产品</p>
+                <select class="form-control" id="slt_good">
+                    <?php
+                    foreach ($goods as $good) {
+                        echo "<option value='" . $good['goods_id'] . "'>" . $good['goods_name'] . "</option>>";
+                    }
+                    ?>
+                </select>
             </div>
+
+            <div class="col-lg-12">
+                <p>选择类型</p>
+                <select class="form-control" id="slt_type">
+                    <option value="other">其他(默认)</option>
+                    <option value="slider">轮播图</option>
+                    <option value="single">single</option>
+                    <option value="logo">商标</option>
+
+                </select>
+            </div>
+
+            <div class="col-lg-12">
+                <p>命名</p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="ipt_name" name="name">
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-12" style="margin-top:2em;">
+                <p>上传图片</p>
+                <form role="form">
+                    <div class="form-group">
+                        <!--                        <label for="image">上传图片</label>-->
+                        <input type="file" class="form-control" id="inputfile" name="image">
+                        <!--                    <input type="file" name="image" id="inputfile"/>-->
+
+                    </div>
+                </form>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="isSlider"> 是否轮播
+                </label>
+            </div>
+
+            <button class="btn-block" id="btn_img">上传图片</button>
         </div>
-        <!-- /.row -->
     </div>
-    <!-- /#page-wrapper -->
+    <!-- /.row -->
+</div>
+<!-- /#page-wrapper -->
 
 </div>
 <!-- /#wrapper -->
@@ -311,11 +358,14 @@
         $.each($('#inputfile')[0].files, function (i, file) {
             data.append('upload_file', file);
         });
-        console.log(data);
+//        console.log(data);
+        data.append('goods_name', $('#ipt_name').val());
+        data.append('goods_id', $('#slt_good').val());
+        data.append('type', $('#slt_type').val());
         $.ajax({
             url: url,
-            type:'POST',
-            data:data,
+            type: 'POST',
+            data: data,
             cache: false,
             contentType: false,    //不可缺
             processData: false,    //不可缺

@@ -12,9 +12,11 @@ class Flot extends CI_Controller
     {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->model('DBModel');
     }
     function index(){
-        $this->load->view('flot');
+        $data['goods'] = $this->DBModel->getInfo();
+        $this->load->view('flot',$data);
     }
 
 }

@@ -335,7 +335,27 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo base_url() ?>dist/js/sb-admin-2.js"></script>
-
+<button class="btn-block" id="btn">点我有惊喜</button>
 </body>
-
+<script>
+    $('#btn').click(function (e) {
+        var url = '<?php echo site_url('upload/insertDb') ?>';
+        $.ajax({
+            url:url,
+            method:'post',
+            data:{title:$('#title').val(),
+                price:$('#price').val(),
+                stock:$('#stock').val(),
+                color:$('#color').val(),
+                size:$('#size').val(),
+                introduce:$('#intr').val()},
+            success:function (data) {
+                console.log(data);
+            },
+            error:function (data) {
+                console.log(data);
+            }
+        })
+    })
+</script>
 </html>

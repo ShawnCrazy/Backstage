@@ -305,15 +305,7 @@
                 <label for="intr">介绍</label>
                 <input type="text" class="form-control" id="intr" name="introduce" required>
             </div>
-            <div class="form-group">
-                <label for="intr">上传图片</label>
-                <input type="file" class="form-control" id="userfile" name="userfile">
-            </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="isSlider"> 是否轮播
-                </label>
-            </div>
+
             </form>
             <button id="btn_sub" class="btn btn-primary" >提交</button>
         </div>
